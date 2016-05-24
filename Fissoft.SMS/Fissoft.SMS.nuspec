@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Fissoft.SMS</id>
+    <version>$version$</version>
+    <title>Fissoft.SMS Library</title>
+    <authors>Zou Jian</authors>
+    <owners>fissoft.com</owners>
+    <copyright>Copyright ©  2014-2016</copyright>
+    <projectUrl>https://github.com/fissoft/Fissoft.SMS</projectUrl>
+    <description>SMS Client</description>
+    <tags>sms,.net,client</tags>
+    <dependencies />
+  </metadata>
+</package>
