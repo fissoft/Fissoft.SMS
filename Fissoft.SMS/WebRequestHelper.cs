@@ -8,46 +8,6 @@ namespace Fissoft.SMS
 {
     internal static class WebRequestHelper
     {
-        public static string GetRequestHtml(string urlString, Encoding encoding, int tryNum = 3)
-        {
-            return WebRequestHelper.GetRequestHtml(urlString, encoding, string.Empty, tryNum);
-        }
-
-        public static string GetRequestHtml(string urlString, Encoding encoding, string referer, int tryNum = 3)
-        {
-            bool flag = false;
-            int num = 0;
-            HttpWebRequest httpWebRequest = (HttpWebRequest)null;
-            string str = "";
-            while (num < tryNum && !flag)
-            {
-                try
-                {
-                    httpWebRequest = WebRequest.Create(urlString) as HttpWebRequest;
-                    httpWebRequest.Timeout = 10000;
-                    httpWebRequest.Method = "GET";
-                    httpWebRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0";
-                    if (!string.IsNullOrEmpty(referer))
-                        httpWebRequest.Referer = referer;
-                    str = new StreamReader(httpWebRequest.GetResponse().GetResponseStream(), encoding).ReadToEnd();
-                    flag = true;
-                }
-                catch (Exception ex)
-                {
-                    //Console.WriteLine(ExceptionExcensions.GetMessages(ex) + urlString);
-                    Thread.Sleep(num * 200);
-                    flag = false;
-                }
-                finally
-                {
-                    ++num;
-                    if (httpWebRequest != null)
-                        httpWebRequest.Abort();
-                }
-            }
-            return str;
-        }
-
         public static string Post(string urlString, string postData, Encoding encoding, int tryNum = 3)
         {
             return WebRequestHelper.Post(urlString, postData, encoding, string.Empty, tryNum);
@@ -126,46 +86,6 @@ namespace Fissoft.SMS
             {
                 return (Stream)null;
             }
-        }
-
-        public static string Head(string urlString, Encoding encoding, int tryNum = 3)
-        {
-            return WebRequestHelper.Head(urlString, encoding, string.Empty, tryNum);
-        }
-
-        public static string Head(string urlString, Encoding encoding, string referer, int tryNum = 3)
-        {
-            bool flag = false;
-            int num = 0;
-            HttpWebRequest httpWebRequest = (HttpWebRequest)null;
-            string str = "";
-            while (num < tryNum && !flag)
-            {
-                try
-                {
-                    httpWebRequest = WebRequest.Create(urlString) as HttpWebRequest;
-                    httpWebRequest.Timeout = 10000;
-                    httpWebRequest.Method = "Head";
-                    httpWebRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0";
-                    if (!string.IsNullOrEmpty(referer))
-                        httpWebRequest.Referer = referer;
-                    str = new StreamReader(httpWebRequest.GetResponse().GetResponseStream(), encoding).ReadToEnd();
-                    flag = true;
-                }
-                catch (Exception ex)
-                {
-                    //Console.WriteLine(ExceptionExcensions.GetMessages(ex) + urlString);
-                    Thread.Sleep(num * 200);
-                    flag = false;
-                }
-                finally
-                {
-                    ++num;
-                    if (httpWebRequest != null)
-                        httpWebRequest.Abort();
-                }
-            }
-            return str;
         }
     }
 }
